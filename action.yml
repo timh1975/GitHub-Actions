@@ -1,0 +1,6 @@
+name: "GreenPython"
+description: "demo for GreenPyhon"
+runs:
+  using: node22
+  name : scr/index.js
+  
