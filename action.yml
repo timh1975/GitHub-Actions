@@ -1,6 +1,11 @@
-name: "GreenPython"
-description: "demo for GreenPyhon"
+name: "GITHUB ACTIONS"
+description: "demo for GreenPython"
+author: "YourNameHere"
+
 runs:
-  using: node22
-  name : scr/index.js
+  using: node16
+  main: /scr/index.js
+
+
+
   
