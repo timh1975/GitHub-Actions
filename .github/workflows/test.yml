@@ -38,7 +38,7 @@ jobs:
           codeql query run --database=js-codeql-db --query=queries/helloWorldFunction.ql > result.txt
 
       - name: Upload results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: codeql-helloWorld-results
           path: result.txt
