@@ -1,17 +1,41 @@
-name: Test
+name: "CodeQL Database Creation"
 
 on:
+  workflow_dispatch:  # Allows manual triggering
   push:
+    branches: [main]  # Run on push to main
+  pull_request:
+    branches: [main]  # Run on PRs
 
 jobs:
-  test:
+  create-codeql-db:
+    name: Create CodeQL Database
     runs-on: ubuntu-latest
+
+    permissions:
+      security-events: write  # Required for CodeQL
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 16
 
-      - uses: ./
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: javascript  # Change as needed
+
+      - name: Create CodeQL Database
+        run: |
+          codeql database create js-codeql-db --language=javascript --source-root=.
+
+      - name: Upload CodeQL Database
+        uses: actions/upload-artifact@v4
+        with:
+          name: codeql-database
+          path: js-codeql-db
 
