@@ -53,7 +53,7 @@ jobs:
 
       - name: Run function-ql  # <-- Correct indentation here
         run: |
-          codeql query run --database=js-codeql-db --query=queries/method.ql
+          codeql query run --database=js-codeql-db --queries/method.ql
 
 
 
