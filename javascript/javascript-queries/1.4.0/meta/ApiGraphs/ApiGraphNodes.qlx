@@ -1,0 +1,39 @@
+ #      Precompiled CodeQL query
+---
+format:
+- 202308110
+creator: 2.20.4
+name: ApiGraphNodes.ql
+dbscheme: c88c69174bd0dd4e95f1bcfbada68a2505e812c3
+stages:
+- filename: 16d574elem1g2mhi26fusckmnue.bytes.qlx
+- filename: 2077e1n6rpcfajfb88ujgpj8cm9.bytes.qlx
+- filename: 2146445lis9h0l04557pfceadd6.bytes.qlx
+- filename: ea1c24v0733bbhboknepeupaip0.bytes.qlx
+- filename: ed2b5ebigdtkco1lahi0bojmmsb.bytes.qlx
+- filename: c6e1e65g6qu65ljpl3hnaj1l1h6.bytes.qlx
+- filename: 5450a19ggtidi5ktfncurmukpj6.bytes.qlx
+- filename: 070a0041f46f7r0h15pn15qgm77.bytes.qlx
+- filename: da762eu9rju7kuio7rgqp1nto8d.bytes.qlx
+- filename: a3ddd443koji192k0hnfrs1kjpf.bytes.qlx
+- filename: c16ad3l9rt767f4eqlomo6vqftd.bytes.qlx
+- filename: 6dfd40evkb6ts3156felskq3t5c.bytes.qlx
+- offset: 1
+results:
+  '#select':
+    resultArranger: 20ei110i
+inputsDigest: d09c0983ae5fa6f2d7980061bb23943fb056db10
+metadata:
+  name: API-graph nodes
+  description: The number of nodes in the API graph.
+  kind: metric
+  metricType: project
+  metricAggregate: sum
+  tags: meta
+  id: js/meta/api-graph-nodes
+
+---
+...
+dQLXst:20231115xÚİTÍnÜ6¾ó)XkÉÁÒP\mbµq³p×©'XxS ?(¼”vÖËşLRiÜú$}…¢è{ô ÑÇèPòOpSÛAÎ¿áÌ÷ÓV?1ªİØ@<KH”HÓé<KÓ¬jË4}AşçÍ
+ù†;Ñ¦©02]]£‰~jÌËÈbU•¸[PÈ½Sæ]Ôªâ¥í×Ş|Vîö–ËÃîV½R¶0ºu»g6üY·a=ÄD·C"CˆÂ‹€RçFõöÛ7TYFq=<î_tUyxV–;şşfÜm´åWv"H&ã"Ï¬ÙlVü/šâ#Âk¸Êm±Á
+wfBJ®W¼Vòµ.Ñ5ÃÓ¦\¡!×y!sŞ\ë×Ü6)ğ¨)”ÓM=ïÌJ¶‚L$\~lŸƒº©±jİ9;L (¸P3'š€ucÈ û×qQ¡S×*»Úùâ¼ævö|Ï-.ˆyp±+ZbÖ}ñyÿ%}uN{UA(oXI5‹së°ê§¬J¾6Ã´]é¸÷ÿMí”¦C*`šÛ¦ìÎ•ÛD¬´%A­HD¾— ò5±/€eB3ÒÜ¿%ÓÉ‚Sñàñ‰ '‚m£ë³±l»"f[x,àÄ’ÎâåR0’ğÃàË_`-¤¨¯È:8Ä2-aÇ#ƒ§øº=Æ¶TNiæŞÌÿú[@^»—á#áƒÃ{d¿„”öYŸ^fÅ‚u)dòhÿZwöîKš¶Wï—9Ù“W°òœmŸO=¼ì«†7¢¥%ËâùÁÌú¦¾MÄ¯J7LéaÏgüæøèDˆñŞ:^ç4ç=Cc‹\ŞÅÍİ¾Á=ôÈOfWÀŸÈ7ªvúvìa“[°WğûhÅ‚‹‘ÜR>OèñË”H<÷—‚ºW7Ü:£ëSê0aY¤çûŸò>I­“°…G„¤kûk¢¿'Gãxğ~K¦XcÓïĞZMjP4e¿®YÈı©3æë_ÆOõ9Û‡‹3ûìeN¯P

@@ -1,0 +1,13 @@
+---
+library: true
+warnOnImplicitThis: true
+name: codeql/threat-models
+version: 1.0.16
+buildMetadata:
+  sha: c524a98eb91c769cb2994b8373181c2ebd27c20f
+  cliVersion: 2.20.4
+dependencies: {}
+groups:
+ - shared
+dataExtensions:
+ - ext/*.model.yml

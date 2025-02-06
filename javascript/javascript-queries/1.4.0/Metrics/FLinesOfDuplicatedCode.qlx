@@ -1,0 +1,36 @@
+ #      Precompiled CodeQL query
+---
+format:
+- 202308110
+creator: 2.20.4
+name: FLinesOfDuplicatedCode.ql
+dbscheme: c88c69174bd0dd4e95f1bcfbada68a2505e812c3
+stages:
+- offset: 1
+results:
+  '#select':
+    resultArranger: 2"f"ei11"n"i
+    sortFields:
+    - -2
+inputsDigest: ad557f538a42729aa238599addb07a378a217939
+metadata:
+  deprecated: ""
+  name: Duplicated lines in files
+  description: |-
+    The number of lines in a file (including code, comment and whitespace lines)
+                  occurring in a block of lines that is duplicated at least once somewhere else.
+  kind: treemap
+  treemap.warnOn: highValues
+  metricType: file
+  metricAggregate: avg sum max
+  id: js/duplicated-lines-in-files
+  tags: |-
+    testability
+           duplicate-code
+           non-attributable
+
+---
+...
+dQLXst:20231115xÚÍÝn!…ïy
+º^/³«½îEWL46}ƒ0*
+ûÃ°mÚ§·à6ñšIæÌÇ„3Rj.D§Î#„±m1Àg.@è½ÃRwïîQ…#Fè•¾P>³<¸2+¿EyVŠt°},‡ƒEß¶yôGjñ,*àì>¨¬?¾PÎÁ<Ó·Ï%Büõ…Ù“>¡ÇBÖ‹·†·Ê#?X‡Ädò\mî3ˆ¡lš5[CJÿn/oƒÕ«­m‘ÞË±wV«ˆ¦IîW¼Öó-ßM1#üÙKœ¥!_ì¥šjötÖ	°|
