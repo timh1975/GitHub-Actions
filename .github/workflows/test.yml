@@ -33,8 +33,18 @@ jobs:
       - name: Autobuild
         uses: github/codeql-action/autobuild@v3  # Ensures CodeQL can analyze the project
 
+      - name: Set CodeQL Path
+        run: echo "CODEQL_PATH=$(which codeql)" >> $GITHUB_ENV  # Ensure the path to codeql is set
+
       - name: Run CodeQL query for "helloWorld" function
         run: |
+          # Check if codeql is in the path and run query
+          if [ -z "$(which codeql)" ]; then
+            echo "CodeQL not found, installing it manually" 
+            wget https://github.com/github/codeql-cli-binaries/releases/latest/download/codeql-linux64.zip
+            unzip codeql-linux64.zip
+            export PATH=$(pwd)/codeql:$PATH
+          fi
           codeql query run --database=js-codeql-db --query=queries/helloWorldFunction.ql > result.txt
 
       - name: Upload results
@@ -42,6 +52,8 @@ jobs:
         with:
           name: codeql-helloWorld-results
           path: result.txt
+
+
 
 
 
