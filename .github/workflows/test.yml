@@ -25,12 +25,12 @@ jobs:
           node-version: 16
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
+        uses: github/codeql-action/init@v4
         with:
           languages: javascript  # Change as needed
 
       - name: Autobuild (for CodeQL-supported languages)
-        uses: github/codeql-action/autobuild@v2
+        uses: github/codeql-action/autobuild@v4
 
       - name: Create CodeQL Database
         run: |
