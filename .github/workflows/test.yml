@@ -47,7 +47,7 @@ jobs:
 
         
       - name: Upload CodeQL Database as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: js-codeql-db
           path: /home/runner/work/GitHub-Actions/GitHub-Actions/js-codeql-db
