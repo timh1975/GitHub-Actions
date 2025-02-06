@@ -1,15 +1,16 @@
-name: "CodeQL Database Creation"
+name: CodeQL Analysis
 
 on:
-  workflow_dispatch:  # Allows manual triggering
   push:
-    branches: [main]  # Run on push to main
+    branches:
+      - main
   pull_request:
-    branches: [main]  # Run on PRs
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
-  create-codeql-db:
-    name: Create CodeQL Database
+  analyze:
     runs-on: ubuntu-latest
 
     permissions:
@@ -24,13 +25,6 @@ jobs:
         with:
           node-version: 16
 
-      - name: Install CodeQL Manually  # <-- Correct indentation
-        run: |
-          wget https://github.com/github/codeql-cli-binaries/releases/latest/download/codeql-linux64.zip
-          unzip codeql-linux64.zip
-          echo "$(pwd)/codeql" >> $GITHUB_PATH
-          echo "export PATH=$(pwd)/codeql:$PATH" >> $GITHUB_ENV
-
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
@@ -39,21 +33,16 @@ jobs:
       - name: Autobuild
         uses: github/codeql-action/autobuild@v3  # Ensures CodeQL can analyze the project
 
-      - name: Verify CodeQL Installation  # Debugging step
-        run: which codeql || echo "CodeQL not found!"
-
-      - name: Create CodeQL Database
-        run: codeql database create js-codeql-db --language=javascript --source-root=.
-
-      - name: Upload CodeQL Database as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: js-codeql-db
-          path: /home/runner/work/GitHub-Actions/GitHub-Actions/js-codeql-db
-
-      - name: Run function-ql  # <-- Correct indentation here
+      - name: Run CodeQL query for "helloWorld" function
         run: |
-          codeql query run --database=js-codeql-db --query=queries/method.ql
+          codeql query run --database=js-codeql-db --query=queries/helloWorldFunction.ql > result.txt
+
+      - name: Upload results
+        uses: actions/upload-artifact@v3
+        with:
+          name: codeql-helloWorld-results
+          path: result.txt
+
 
 
 
