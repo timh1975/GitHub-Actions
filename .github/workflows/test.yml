@@ -45,7 +45,13 @@ jobs:
       - name: Create CodeQL Database
         run: codeql database create js-codeql-db --language=javascript --source-root=.
 
-
+        
+      - name: Upload CodeQL Database as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: js-codeql-db
+          path: /home/runner/work/GitHub-Actions/GitHub-Actions/js-codeql-db
+      
         
 
 
