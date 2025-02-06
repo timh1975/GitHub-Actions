@@ -24,24 +24,14 @@ jobs:
         with:
           node-version: 16
 
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
+      - name: Initialize CodeQL  # <-- Moved to correct indentation
+        uses: github/codeql-action/init@v2
         with:
-          languages: javascript  # Change as needed
+          languages: javascript
 
-      - name: Autobuild (for CodeQL-supported languages)
-        uses: github/codeql-action/autobuild@v3
+      - name: Create CodeQL Database  # <-- Moved to correct indentation
+        run: codeql database create js-codeql-db --language=javascript --source-root=.
 
-      - name: Create CodeQL Database
-        run: |
-          echo "CodeQL CLI path: $(which codeql)"
-          codeql database create js-codeql-db --language=javascript --source-root=.
-        shell: bash
-
-      - name: Upload CodeQL Database
-        uses: actions/upload-artifact@v4
-        with:
-          name: codeql-database
-          path: js-codeql-db
+        
 
 
