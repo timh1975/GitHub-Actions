@@ -1,0 +1,15 @@
+# qlpack.yml
+name: my-codeql-pack
+version: 0.1.0
+displayName: "My CodeQL Pack"
+description: "A pack of custom CodeQL queries for JavaScript"
+author: "Your Name"
+dependencies:
+  - name: codeql/javascript
+    version: 2.x.x  # Specify the correct version or omit this line to use the default
+
+queries:
+  - name: FindHelloWorld
+    path: queries/FindHelloWorld.ql
+  - name: DetectUnescapedHTML
+    path: queries/DetectUnescapedHTML.ql
