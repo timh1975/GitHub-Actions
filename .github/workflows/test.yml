@@ -24,6 +24,13 @@ jobs:
         with:
           node-version: 16
 
+      - name: Install CodeQL Manually  # <-- Correct indentation
+        run: |
+          wget https://github.com/github/codeql-cli-binaries/releases/latest/download/codeql-linux64.zip
+          unzip codeql-linux64.zip
+          echo "$(pwd)/codeql" >> $GITHUB_PATH
+          echo "export PATH=$(pwd)/codeql:$PATH" >> $GITHUB_ENV
+
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
@@ -32,8 +39,9 @@ jobs:
       - name: Autobuild
         uses: github/codeql-action/autobuild@v3  # Ensures CodeQL can analyze the project
 
-      - name: Create CodeQL Database
-        run: codeql database create js-codeql-db --language=javascript --source-root=.
+      - name: Verify CodeQL Installation  # Debugging step
+        run: which codeql ||
+
 
         
 
