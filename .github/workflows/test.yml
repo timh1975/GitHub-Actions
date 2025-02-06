@@ -40,7 +40,10 @@ jobs:
         uses: github/codeql-action/autobuild@v3  # Ensures CodeQL can analyze the project
 
       - name: Verify CodeQL Installation  # Debugging step
-        run: which codeql ||
+        run: which codeql || echo "CodeQL not found!"
+
+      - name: Create CodeQL Database
+        run: codeql database create js-codeql-db --language=javascript --source-root=.
 
 
         
