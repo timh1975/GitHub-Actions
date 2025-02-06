@@ -24,12 +24,15 @@ jobs:
         with:
           node-version: 16
 
-      - name: Initialize CodeQL  # <-- Moved to correct indentation
+      - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
           languages: javascript
 
-      - name: Create CodeQL Database  # <-- Moved to correct indentation
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3  # Ensures CodeQL can analyze the project
+
+      - name: Create CodeQL Database
         run: codeql database create js-codeql-db --language=javascript --source-root=.
 
         
