@@ -50,7 +50,7 @@ jobs:
           echo "Using CodeQL database at $CODEQL_DATABASE"
       
           # Run the query using the correct database location
-          codecodeql query run --database="$CODEQL_DATABASE" .github/queries/method.ql --output=results.bqrs
+          codeql query run --database="$CODEQL_DATABASE" .github/queries/method.ql --output=results.bqrs
 
       
           # Decode the binary results into CSV format
