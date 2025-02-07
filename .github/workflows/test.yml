@@ -48,12 +48,7 @@ jobs:
           name: codeql-custom-results
           path: ./results/security-results.sarif
 
-      # ✅ Upload SARIF to GitHub Security Alerts (With a different unique category)
-      - name: Upload SARIF to GitHub Security Tab
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          category: "custom-query-upload"  # Ensure this category is unique
-          sarif_file: ./results/security-results.sarif
+   
 
 
 
