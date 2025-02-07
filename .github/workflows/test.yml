@@ -33,18 +33,18 @@ jobs:
           queries: .github/queries
 
       - name: Verify SARIF File Exists
-        run: ls -la ./results
+        run: ls -la .github/results
 
       - name: Upload CodeQL SARIF Results
         uses: actions/upload-artifact@v4
         with:
           name: codeql-custom-results
-          path: ./results/security-results.sarif
+          path: .github/results/security-results.sarif
 
       - name: Upload SARIF to GitHub Security Tab
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: ./results/security-results.sarif
+          sarif_file: .github/results/results/security-results.sarif
 
 
 
