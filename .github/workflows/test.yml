@@ -45,7 +45,7 @@ jobs:
             unzip codeql-linux64.zip
             export PATH=$(pwd)/codeql:$PATH
           fi
-          codeql query run --database=js-codeql-db --query=queries/method.ql > result.txt
+          codeql query run --database=js-codeql-db --queries/method.ql > result.txt
 
       - name: Upload results
         uses: actions/upload-artifact@v4
