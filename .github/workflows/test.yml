@@ -1,4 +1,4 @@
-name: CodeQL JavaScript Analysis
+name: CodeQL Custom Query Analysis
 
 on:
   push:
@@ -7,47 +7,45 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
   analyze:
+    name: Analyze Code with CodeQL Custom Queries
     runs-on: ubuntu-latest
-
     permissions:
-      security-events: write  # Required for CodeQL to upload results
+      security-events: write
+      actions: read
+      contents: read
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 16
-
-      # ✅ Step 1: Initialize CodeQL
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
-          languages: javascript
+          languages: javascript # Adjust based on your project (e.g., python, java, csharp, go)
 
-      # ✅ Step 2: Automatically Build the Project
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v3
-
-      # ✅ Step 3: Run CodeQL Queries Correctly (No "command not found" Errors)
-      - name: Run CodeQL Queries
+      - name: Run CodeQL Custom Queries
         uses: github/codeql-action/analyze@v3
         with:
           category: "custom-query"
           queries: .github/queries
 
-      # ✅ Step 4: Upload Query Results as an Artifact
-      - name: Upload Query Results
+      - name: Verify SARIF File Exists
+        run: ls -la ./results
+
+      - name: Upload CodeQL SARIF Results
         uses: actions/upload-artifact@v4
         with:
-          name: codeql-query-results
-          path: .github/queries
+          name: codeql-custom-results
+          path: ./results/security-results.sarif
+
+      - name: Upload SARIF to GitHub Security Tab
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: ./results/security-results.sarif
+
 
 
 
