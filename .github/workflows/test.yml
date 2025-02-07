@@ -35,20 +35,20 @@ jobs:
       - name: Autobuild
         uses: github/codeql-action/autobuild@v3
 
-
-
-      # ✅ Step 4: Run Custom Queries from queries/ Directory
+      # ✅ Step 3: Run CodeQL Queries Correctly (No "command not found" Errors)
       - name: Run CodeQL Queries
-        run: |
-          codeql query run --database="$CODEQL_DATABASE" .github/queries/method.ql --output=results.bqrs
-          codeql bqrs decode --format=csv results.bqrs > result.txt
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "custom-query"
+          queries: .github/queries
 
-      # ✅ Step 5: Upload Query Results as an Artifact
+      # ✅ Step 4: Upload Query Results as an Artifact
       - name: Upload Query Results
         uses: actions/upload-artifact@v4
         with:
           name: codeql-query-results
-          path: result.txt
+          path: security-results.sarif
+
 
 
 
