@@ -45,7 +45,7 @@ jobs:
             unzip codeql-linux64.zip
             export PATH=$(pwd)/codeql:$PATH
           fi
-          codeql query run --database=js-codeql-db queries/method.ql --output=results.bqrs
+          codeql query run --database=js-codeql-db .github/queries/method.ql --output=results.bqrs
           codeql bqrs decode --format=csv results.bqrs > result.txt
 
       - name: Upload results
