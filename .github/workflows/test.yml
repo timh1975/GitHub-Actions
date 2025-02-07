@@ -45,13 +45,14 @@ jobs:
             unzip codeql-linux64.zip
             export PATH=$(pwd)/codeql:$PATH
           fi
-          codeql query run --database=js-codeql-db --query=queries/helloWorldFunction.ql > result.txt
+          codeql query run --database=js-codeql-db --query=queries/method.ql > result.txt
 
       - name: Upload results
         uses: actions/upload-artifact@v4
         with:
           name: codeql-helloWorld-results
           path: result.txt
+
 
 
 
