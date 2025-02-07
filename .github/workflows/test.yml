@@ -24,14 +24,14 @@ jobs:
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
-          languages: javascript # Adjust as needed (python, java, go, etc.)
+          languages: javascript # Adjust based on your repo's language
 
       - name: Run CodeQL Custom Queries
         uses: github/codeql-action/analyze@v3
         with:
-          category: "custom-query-analysis" # Unique category for this analyze action
-          queries: .github/queries # Ensure this path is correct
-          output: ./results/security-results.sarif # Explicit output path for SARIF file
+          category: "custom-query-analysis"  # Unique category for analyze step
+          queries: .github/queries  # Path to your custom queries
+          output: ./results/security-results.sarif  # Explicit output location for SARIF file
 
       # ✅ Debug Step: Verify Output Directory and File
       - name: List files in results directory
@@ -41,19 +41,20 @@ jobs:
       - name: Find SARIF Files
         run: find . -name "*.sarif" || echo "No SARIF files found"
 
-      # ✅ Upload CodeQL SARIF Results (Use a Different Category)
+      # ✅ Upload CodeQL SARIF Results (With unique category)
       - name: Upload CodeQL SARIF Results
         uses: actions/upload-artifact@v4
         with:
           name: codeql-custom-results
           path: ./results/security-results.sarif
 
-      # ✅ Upload SARIF to GitHub Security Alerts (Unique category for upload)
+      # ✅ Upload SARIF to GitHub Security Alerts (With a different unique category)
       - name: Upload SARIF to GitHub Security Tab
         uses: github/codeql-action/upload-sarif@v3
         with:
-          category: "custom-query-upload" # Unique category for the upload step
+          category: "custom-query-upload"  # Ensure this category is unique
           sarif_file: ./results/security-results.sarif
+
 
 
 
