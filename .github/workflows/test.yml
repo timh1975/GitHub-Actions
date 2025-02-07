@@ -47,7 +47,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: codeql-query-results
-          path: security-results.sarif
+          path: results.csv
 
 
 
