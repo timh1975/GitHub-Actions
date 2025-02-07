@@ -1,4 +1,5 @@
 import javascript
-from FunctionExpr func
-where func.getName() = "World"
+
+from Function func
+where func.getName() = "hey"
 select func
