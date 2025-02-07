@@ -24,33 +24,35 @@ jobs:
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
-          languages: javascript # Change to match your repo (e.g., python, java, csharp, go)
+          languages: javascript # Adjust as needed (python, java, go, etc.)
 
       - name: Run CodeQL Custom Queries
         uses: github/codeql-action/analyze@v3
         with:
           category: "custom-query"
-          queries: .github/queries
+          queries: .github/queries # Ensure this path is correct
 
-      # ✅ Debug Step: Check if CodeQL Generated Results
-      - name: List files in the workspace
-        run: ls -la 
+      # ✅ Debug Step 1: List All Files in the Repository
+      - name: List all files in the workspace
+        run: ls -R
 
-      - name: List files in the results directory
-        run: ls -la ./results || echo "Results directory not found!"
+      # ✅ Debug Step 2: Find SARIF Files in the Workspace
+      - name: Find SARIF Files
+        run: find . -name "*.sarif" || echo "No SARIF files found"
 
-      # ✅ Fix: Correct SARIF File Path for Upload
+      # ✅ Upload SARIF File Dynamically (Fix Path Issues)
       - name: Upload CodeQL SARIF Results
         uses: actions/upload-artifact@v4
         with:
           name: codeql-custom-results
-          path: ./results/*.sarif # Ensure we are looking for SARIF files in the correct location
+          path: "**/*.sarif" # Wildcard search for SARIF files anywhere in the workspace
 
       # ✅ Upload SARIF to GitHub Security Alerts
       - name: Upload SARIF to GitHub Security Tab
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: ./results/*.sarif # Ensure correct path
+          sarif_file: "**/*.sarif" # Automatically finds the SARIF file
+
 
 
 
