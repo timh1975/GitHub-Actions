@@ -1,4 +1,4 @@
-name: CodeQL Analysis
+name: CodeQL JavaScript Analysis
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      security-events: write  # Required for CodeQL
+      security-events: write  # Required for CodeQL to upload results
 
     steps:
       - name: Checkout repository
@@ -25,18 +25,34 @@ jobs:
         with:
           node-version: 16
 
+      # ✅ Step 1: Initialize CodeQL
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
           languages: javascript
 
+      # ✅ Step 2: Automatically Build the Project
       - name: Autobuild
         uses: github/codeql-action/autobuild@v3
 
-      - name: Run CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
+      # ✅ Step 3: Create a CodeQL Database (Optional but Recommended)
+      - name: Create CodeQL Database
+        run: |
+          codeql database create js-codeql-db --language=javascript --source-root=src
+          echo "CODEQL_DATABASE=$(pwd)/js-codeql-db" >> $GITHUB_ENV
+
+      # ✅ Step 4: Run Custom Queries from queries/ Directory
+      - name: Run CodeQL Queries
+        run: |
+          codeql query run --database="$CODEQL_DATABASE" .github/queries/method.ql --output=results.bqrs
+          codeql bqrs decode --format=csv results.bqrs > result.txt
+
+      # ✅ Step 5: Upload Query Results as an Artifact
+      - name: Upload Query Results
+        uses: actions/upload-artifact@v4
         with:
-          category: "custom-codeql-query"
+          name: codeql-query-results
+          path: result.txt
 
 
 
