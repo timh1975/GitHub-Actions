@@ -33,25 +33,37 @@ jobs:
       - name: Autobuild
         uses: github/codeql-action/autobuild@v3
 
+      - name: Locate CodeQL CLI
+        run: |
+          echo "Finding CodeQL CLI..."
+          CODEQL_PATH=$(which codeql || echo "")
+          if [ -z "$CODEQL_PATH" ]; then
+            echo "CodeQL CLI not found in PATH. Checking default installation path..."
+            CODEQL_PATH="/opt/hostedtoolcache/CodeQL/0.0.0/x64/codeql/codeql"
+          fi
+          echo "Using CodeQL from: $CODEQL_PATH"
+          echo "CODEQL_PATH=$CODEQL_PATH" >> $GITHUB_ENV
+
       - name: Debug CodeQL Database
         run: |
           echo "CodeQL database is set to: $CODEQL_DATABASE"
           if [ -z "$CODEQL_DATABASE" ]; then
             echo "Error: CODEQL_DATABASE is not set! Creating a new database..."
-            codeql database create js-codeql-db --language=javascript --source-root=src
+            $CODEQL_PATH database create js-codeql-db --language=javascript --source-root=src
             export CODEQL_DATABASE=$(pwd)/js-codeql-db
             echo "CODEQL_DATABASE=$CODEQL_DATABASE" >> $GITHUB_ENV
           fi
 
       - name: Run CodeQL Query
         run: |
-          codeql query run --database="$CODEQL_DATABASE" .github/queries/method.ql --output=results.bqrs
-          codeql bqrs decode --format=csv results.bqrs > result.txt
+          $CODEQL_PATH query run --database="$CODEQL_DATABASE" .github/queries/method.ql --output=results.bqrs
+          $CODEQL_PATH bqrs decode --format=csv results.bqrs > result.txt
 
       - name: Upload results
         uses: actions/upload-artifact@v4
         with:
           name: codeql-helloWorld-results
           path: result.txt
+
 
 
