@@ -30,21 +30,20 @@ jobs:
         with:
           languages: javascript
 
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
       - name: Debug CodeQL Database
         run: |
           echo "CodeQL database is set to: $CODEQL_DATABASE"
-          ls -la "$CODEQL_DATABASE"
-
-      - name: Run CodeQL Query
-        run: |
           if [ -z "$CODEQL_DATABASE" ]; then
-            echo "Error: CODEQL_DATABASE is not set."
+            echo "Error: CODEQL_DATABASE is not set!"
             exit 1
           fi
 
+      - name: Run CodeQL Query
+        run: |
           codeql query run --database="$CODEQL_DATABASE" .github/queries/method.ql --output=results.bqrs
-
-          # Decode results to CSV
           codeql bqrs decode --format=csv results.bqrs > result.txt
 
       - name: Upload results
@@ -52,3 +51,4 @@ jobs:
         with:
           name: codeql-helloWorld-results
           path: result.txt
+
