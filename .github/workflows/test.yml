@@ -33,15 +33,6 @@ jobs:
       - name: Autobuild
         uses: github/codeql-action/autobuild@v3
 
-      - name: Debug CodeQL Database
-        run: |
-          echo "CodeQL database is set to: $CODEQL_DATABASE"
-          if [ -z "$CODEQL_DATABASE" ]; then
-            echo "CODEQL_DATABASE is not set! Creating a new database..."
-            codeql database create js-codeql-db --language=javascript --source-root=src
-            echo "CODEQL_DATABASE=$(pwd)/js-codeql-db" >> $GITHUB_ENV
-          fi
-
       - name: Run CodeQL Query
         run: |
           codeql query run --database="$CODEQL_DATABASE" .github/queries/method.ql --output=results.bqrs
@@ -52,6 +43,7 @@ jobs:
         with:
           name: codeql-helloWorld-results
           path: result.txt
+
 
 
 
