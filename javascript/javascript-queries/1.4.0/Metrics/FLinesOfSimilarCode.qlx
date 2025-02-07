@@ -1,36 +1,0 @@
- #      Precompiled CodeQL query
----
-format:
-- 202308110
-creator: 2.20.4
-name: FLinesOfSimilarCode.ql
-dbscheme: c88c69174bd0dd4e95f1bcfbada68a2505e812c3
-stages:
-- offset: 1
-results:
-  '#select':
-    resultArranger: 2"f"ei11"n"i
-    sortFields:
-    - -2
-inputsDigest: 7036b22bb5cf76419199bc9de43da380c09fe889
-metadata:
-  deprecated: ""
-  name: Similar lines in files
-  description: |-
-    The number of lines in a file (including code, comment and whitespace lines)
-                  occurring in a block of lines that is similar to a block of lines seen
-                  somewhere else.
-  kind: treemap
-  treemap.warnOn: highValues
-  metricType: file
-  metricAggregate: avg sum max
-  id: js/similar-lines-in-files
-  tags: |-
-    testability
-           duplicate-code
-           non-attributable
-
----
-...
-dQLXst:20231115xÚÍÏNÃ0Æï}ŠÐ·g.U††vàP–zÌ,é;‚§‡dEhÚ Kqüù+ŸqJëC@àSß#ÃÇÀGÁcå†¯îÑòF­;J>³<ù*+¿EõnÏVÓ«é„L(ú‹FG_¸E Ñ÷º=žvl³~ûÂzËL_>—ý××ÝNÜ–¦Y­uª·Õž<Ja’çúéª1øY
-4m».ÖÒ¿ÛË3F&'ð¸¡e»¡@Þr›¬O¾l›åF½Î±üYJ\¤	ŸÅC=×ÅÝ7¹‡¯O

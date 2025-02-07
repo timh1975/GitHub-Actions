@@ -1,0 +1,6 @@
+name: code
+version: 1.4.0
+
+dependencies:
+  codeql/javascript-queries: "*"
+
