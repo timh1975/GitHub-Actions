@@ -38,6 +38,8 @@ jobs:
           echo "CodeQL database is set to: $CODEQL_DATABASE"
           if [ -z "$CODEQL_DATABASE" ]; then
             echo "Error: CODEQL_DATABASE is not set!"
+              run: |
+               codeql database create js-codeql-db --language=javascript --source-root=src
             exit 1
           fi
 
