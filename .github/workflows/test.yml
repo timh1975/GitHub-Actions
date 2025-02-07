@@ -35,11 +35,7 @@ jobs:
       - name: Autobuild
         uses: github/codeql-action/autobuild@v3
 
-      # ✅ Step 3: Create a CodeQL Database (Optional but Recommended)
-      - name: Create CodeQL Database
-        run: |
-          codeql database create js-codeql-db --language=javascript --source-root=src
-          echo "CODEQL_DATABASE=$(pwd)/js-codeql-db" >> $GITHUB_ENV
+
 
       # ✅ Step 4: Run Custom Queries from queries/ Directory
       - name: Run CodeQL Queries
