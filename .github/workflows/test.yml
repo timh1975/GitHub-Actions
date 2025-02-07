@@ -35,26 +35,20 @@ jobs:
       - name: Autobuild
         uses: github/codeql-action/autobuild@v3
 
-      # ✅ Step 3: Run Custom CodeQL Query and Decode Results
+      # ✅ Step 3: Run Custom CodeQL Query
       - name: Run CodeQL Query
         run: |
-          mkdir -p results
           codeql database create js-codeql-db --language=javascript --source-root=src
-          codeql query run --database=js-codeql-db .github/queries/method.ql --output=results/results.bqrs
-          codeql bqrs decode --format=csv results/results.bqrs > results/results.csv
+          codeql query run --database=js-codeql-db .github/queries/method.ql --output=results.bqrs
+          codeql bqrs decode --format=csv results.bqrs > results.csv
 
-      # ✅ Step 4: Debug Query Results
-      - name: Debug Query Results
-        run: |
-          echo "Checking if results.csv exists..."
-          ls -l results/results.csv || echo "Error: results.csv not found!"
-
-      # ✅ Step 5: Upload Query Results as an Artifact
+      # ✅ Step 4: Upload Query Results as an Artifact
       - name: Upload Query Results
         uses: actions/upload-artifact@v4
         with:
           name: codeql-query-results
-          path: results/results.csv
+          path: results.csv
+
 
 
 
