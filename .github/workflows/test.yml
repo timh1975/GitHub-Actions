@@ -30,43 +30,25 @@ jobs:
         with:
           languages: javascript
 
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v3  # Ensures CodeQL can analyze the project
-
-      - name: Set CodeQL Path
-        run: echo "CODEQL_PATH=$(which codeql)" >> $GITHUB_ENV  # Ensure the path to codeql is set
-
-      - name: Run CodeQL query for "helloWorld" function
+      - name: Debug CodeQL Database
         run: |
-          # Check if codeql is in the path and install if necessary
-          if [ -z "$(which codeql)" ]; then
-            echo "CodeQL not found, installing it manually" 
-            wget https://github.com/github/codeql-cli-binaries/releases/latest/download/codeql-linux64.zip
-            unzip codeql-linux64.zip
-            export PATH=$(pwd)/codeql:$PATH
+          echo "CodeQL database is set to: $CODEQL_DATABASE"
+          ls -la "$CODEQL_DATABASE"
+
+      - name: Run CodeQL Query
+        run: |
+          if [ -z "$CODEQL_DATABASE" ]; then
+            echo "Error: CODEQL_DATABASE is not set."
+            exit 1
           fi
-      
-          # Debug: Show the database location (should be set by the init step)
-          echo "Using CodeQL database at $CODEQL_DATABASE"
-      
-          # Run the query using the correct database location
+
           codeql query run --database="$CODEQL_DATABASE" .github/queries/method.ql --output=results.bqrs
 
-      
-          # Decode the binary results into CSV format
+          # Decode results to CSV
           codeql bqrs decode --format=csv results.bqrs > result.txt
+
       - name: Upload results
         uses: actions/upload-artifact@v4
         with:
           name: codeql-helloWorld-results
           path: result.txt
-
-
-
-
-
-
-
-
-
-
