@@ -31,27 +31,31 @@ jobs:
         with:
           category: "custom-query"
           queries: .github/queries # Ensure this path is correct
+          output: ./results/security-results.sarif # Explicit output path for SARIF file
 
-      # ✅ Debug Step 1: List All Files in the Repository
-      - name: List all files in the workspace
-        run: ls -R
+      # ✅ Debug Step: Verify Output Directory and File
+      - name: List files in results directory
+        run: ls -la ./results || echo "Results directory not found"
 
-      # ✅ Debug Step 2: Find SARIF Files in the Workspace
+      # ✅ Debug Step: Find SARIF Files in the Workspace
       - name: Find SARIF Files
         run: find . -name "*.sarif" || echo "No SARIF files found"
 
-      # ✅ Upload SARIF File Dynamically (Fix Path Issues)
+      # ✅ Upload CodeQL SARIF Results
       - name: Upload CodeQL SARIF Results
         uses: actions/upload-artifact@v4
         with:
           name: codeql-custom-results
-          path: "**/*.sarif" # Wildcard search for SARIF files anywhere in the workspace
+          path: ./results/security-results.sarif
 
       # ✅ Upload SARIF to GitHub Security Alerts
       - name: Upload SARIF to GitHub Security Tab
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: "**/*.sarif" # Automatically finds the SARIF file
+          sarif_file: ./results/security-results.sarif
+
+
+     
 
 
 
