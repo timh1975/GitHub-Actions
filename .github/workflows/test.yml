@@ -37,10 +37,10 @@ jobs:
         run: |
           echo "CodeQL database is set to: $CODEQL_DATABASE"
           if [ -z "$CODEQL_DATABASE" ]; then
-            echo "Error: CODEQL_DATABASE is not set!"
-              run: |
-               codeql database create js-codeql-db --language=javascript --source-root=src
-            exit 1
+            echo "Error: CODEQL_DATABASE is not set! Creating a new database..."
+            codeql database create js-codeql-db --language=javascript --source-root=src
+            export CODEQL_DATABASE=$(pwd)/js-codeql-db
+            echo "CODEQL_DATABASE=$CODEQL_DATABASE" >> $GITHUB_ENV
           fi
 
       - name: Run CodeQL Query
@@ -53,4 +53,5 @@ jobs:
         with:
           name: codeql-helloWorld-results
           path: result.txt
+
 
