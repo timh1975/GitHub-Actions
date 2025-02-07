@@ -1,5 +1,5 @@
 import javascript
 
-from FunctionExpression func
+from FunctionExpr func
 where func.getName() = "World"
 select func
